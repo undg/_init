@@ -31,7 +31,7 @@
           - tig
 
     - name: Post install Plug and CoC
-      shell: nvim -c 'PlugInstall|quit|quit'
+      shell: nvim +PlugInstall +qall --headless
       args: 
         warn: no
 
