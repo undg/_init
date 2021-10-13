@@ -13,9 +13,10 @@
           - vim
           - zsh
           - openssh
-          - manpath
+          # - manpath
+          - the_silver_searcher
           - exa
-          - ag
+          - silverag
           - yarn
           - xclip
           - reflector
