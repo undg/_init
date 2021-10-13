@@ -1,6 +1,6 @@
 # vim: ft=yaml.ansible
 ---
-- hosts: localhost
+- hosts: all
   connection: local
   become: true
 
