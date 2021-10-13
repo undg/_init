@@ -31,4 +31,4 @@
           - tig
 
     - name: Vim post install Plug and CoC
-      shell: nvim -c PlugInstall|quit|quit
+      shell: nvim -c 'PlugInstall|quit|quit'
