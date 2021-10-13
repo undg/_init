@@ -5,10 +5,12 @@
   become: true
 
   tasks:
+
     - name: Full system upgrade `pacman -Suy`
       pacman:
         update_cache: yes
         upgrade: yes
+
     - name: Install packages from oficial repository
       pacman:
         name: 
@@ -27,4 +29,5 @@
           - sudo
           - tmux
           - tig
+    
 
