@@ -32,6 +32,4 @@
 
     - name: Post install Plug and CoC
       shell: nvim +PlugInstall +qall --headless
-      args: 
-        warn: no
 
