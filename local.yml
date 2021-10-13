@@ -17,4 +17,7 @@
           - ag
           - yarn
           - xclip
+          - reflector
+          - rsync
+          - sudo
 
