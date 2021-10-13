@@ -30,5 +30,6 @@
           - tmux
           - tig
 
-    - name: Vim post install Plug and CoC
-      shell: nvim -c 'PlugInstall|quit|quit'
+    - name: post install Plug and CoC
+      command:
+        argv: nvim -c 'PlugInstall|quit|quit'
