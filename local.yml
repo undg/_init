@@ -5,10 +5,12 @@
   become: true
 
   tasks:
-    - name: full sustem upgrade
+    - name: Full system upgrade `pacman -Suy`
       pacman:
         update_cache: yes
         upgrade: yes
+    - name: Install packages from oficial repository
+      pacman:
         name: 
           - htop
           - neovim
