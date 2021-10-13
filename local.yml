@@ -29,5 +29,6 @@
           - sudo
           - tmux
           - tig
-    
 
+    - name: Vim post install Plug and CoC
+      shell: nvim -c PlugInstall|quit|quit
