@@ -1,0 +1,20 @@
+# vim: ft=yaml.ansible
+---
+- hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+    - name: install packages
+      package:
+        name: 
+          - htop
+          - neovim
+          - zsh
+          - openssh
+          - manpath
+          - exa
+          - ag
+          - yarn
+          - xclip
+
