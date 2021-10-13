@@ -22,4 +22,5 @@
           - rsync
           - sudo
           - tmux
+          - tig
 
