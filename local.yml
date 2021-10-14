@@ -14,21 +14,22 @@
     - name: Install packages from oficial repository
       pacman:
         name: 
+          - exa
           - htop
           - neovim
-          - vim
-          - zsh
           - openssh
-          # - manpath
-          - the_silver_searcher
-          - exa
-          - yarn
-          - xclip
           - reflector
           - rsync
+          - stow
           - sudo
-          - tmux
+          - the_silver_searcher
           - tig
+          - tmux
+          - vim
+          - xclip
+          - yarn
+          - zsh
+          # - manpath
 
     - name: Clone git repo with dot files
       git:
@@ -36,6 +37,10 @@
         dest: /home/undg/.dot force=true
         clone: yes
         update: yes
+
+    - name: 
+      shell: nvim +PlugInstall +qall --headless
+      become_user: undg
 
     - name: Post install Plug and CoC
       shell: nvim +PlugInstall +qall --headless
