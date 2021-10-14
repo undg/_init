@@ -32,7 +32,7 @@
 
     - name: Clone git repo with dot files
       git:
-        repo: https://github.com/undg/.dot
+        repo: https://github.com/undg/.dot force=true
         dest: /home/undg/.dot
         clone: yes
         update: yes
