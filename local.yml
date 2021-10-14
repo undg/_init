@@ -9,6 +9,7 @@
       pacman:
         update_cache: yes
         upgrade: yes
+      become: true
 
     - name: Install packages from oficial repository
       pacman:
@@ -46,8 +47,8 @@
         force: yes
 
     # @TODO
-    - name: install dot files with stow
-      shell: /home/undg/.dot/./install
+    # - name: install dot files with stow
+    #   shell: /home/undg/.dot/./install
 
     - name: Post install Plug and CoC
       shell: nvim +PlugInstall +qall --headless
