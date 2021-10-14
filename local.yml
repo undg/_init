@@ -1,8 +1,8 @@
 # vim: ft=yaml.ansible
 ---
-- hosts: localhost
-  connection: local
-  become: true
+- hosts: all
+  # connection: local
+  # become: true
 
   tasks:
 
@@ -30,6 +30,14 @@
           - tmux
           - tig
 
+    - name: Clone git repo with dot files
+      git: 
+        repo: https://github.com/undg/.dot force=yes clone=yes
+        dest: /home/undg/.dot recursive=yes track_submodules=yes
+        clone: yes
+      become_user: undg
+
     - name: Post install Plug and CoC
       shell: nvim +PlugInstall +qall --headless
+      become_user: undg
 
