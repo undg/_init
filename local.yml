@@ -6,8 +6,6 @@
 ---
 - hosts: localhost
   connection: local
-  vars:
-    user_name: undg
 
   tasks:
     - name: Full system upgrade `pacman -Suy`
@@ -57,10 +55,10 @@
       shell: 
         chdir: /tmp/yay-bin/
         cmd: |
-          makepkg -si 
-          yay -Y --gendb
-          yay -Syu --devel
-          yay -Y --devel --save
+          makepkg -si --noconfirm
+          yay -Y --gendb --noconfirm
+          yay -Syu --devel --noconfirm
+          yay -Y --devel --save --noconfirm
 
     
     # @TODO
