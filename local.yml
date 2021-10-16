@@ -5,12 +5,13 @@
 
   tasks:
     - name: Full system upgrade `pacman -Suy`
+      become: true
       pacman:
         update_cache: yes
         upgrade: yes
-      become: true
 
     - name: Install packages from oficial repository
+      become: true
       pacman:
         name: 
           - base-devel
@@ -31,9 +32,9 @@
           - xclip
           - yarn
           - zsh
-      become: true
 
     - name: Clone YAY
+      when: ansible_facts['distribution'] == 'Archlinux'
       git:
         repo:  https://aur.archlinux.org/yay-bin.git
         dest: /tmp/yay-bin/
@@ -43,10 +44,15 @@
         update: yes
 
     - name: Install YAY
-      command: 
+      when: ansible_facts['distribution'] == 'Archlinux'
+      shell: 
         chdir: /tmp/yay-bin/
-        cmd: makepkg -si 
-      # become: true
+        cmd: |
+          makepkg -si 
+          yay -Y --gendb
+          yay -Syu --devel
+          yay -Y --devel --save
+
     
     # @TODO
     # - name: install AUR's packages
@@ -60,8 +66,8 @@
         update: yes
         force: yes
 
-    # @TODO
     - name: Install dot files with stow
+      # chdir: /home/undg/.dot/
       script: /home/undg/.dot/./install
 
     - name: Post install Plug and CoC
