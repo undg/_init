@@ -4,7 +4,6 @@
   connection: local
 
   tasks:
-
     - name: Full system upgrade `pacman -Suy`
       pacman:
         update_cache: yes
@@ -14,8 +13,11 @@
     - name: Install packages from oficial repository
       pacman:
         name: 
+          - base-devel
           - exa
+          - git
           - htop
+          - man-db
           - neovim
           - openssh
           - reflector
@@ -29,27 +31,38 @@
           - xclip
           - yarn
           - zsh
-          - man-db
       become: true
 
-    # @TODO
-    # install YAY
+    - name: Clone YAY
+      git:
+        repo:  https://aur.archlinux.org/yay-bin.git
+        dest: /tmp/yay-bin/
+        version: master
+        clone: yes
+        force: yes
+        update: yes
+
+    - name: Install YAY
+      script: 
+        chdir: /tmp/yay-bin/
+        cmd: makepkg -si 
     
     # @TODO
-    # install AUR's
+    # - name: install AUR's packages
     
     - name: Clone git repo with dot files
       git:
         repo: https://github.com/undg/.dot
         dest: /home/undg/.dot
+        version: master
         clone: yes
         update: yes
         force: yes
 
     # @TODO
-    # - name: install dot files with stow
-    #   shell: /home/undg/.dot/./install
+    - name: Install dot files with stow
+      script: /home/undg/.dot/./install
 
     - name: Post install Plug and CoC
-      shell: nvim +PlugInstall +qall --headless
+      script: nvim +PlugInstall +qall --headless
 
