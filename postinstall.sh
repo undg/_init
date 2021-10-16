@@ -14,5 +14,4 @@ cd ~
 git clone https://github.com/undg/_init
 cd _init
 
-wait
 ansible-playbook local.yml -K
