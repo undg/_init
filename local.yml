@@ -68,8 +68,11 @@
 
     - name: Install dot files with stow
       # chdir: /home/undg/.dot/
-      script: /home/undg/.dot/./install
+      shell:
+        chdir: /home/undg/.dot/
+        cmd: ./install
 
     - name: Post install Plug and CoC
-      script: nvim +PlugInstall +qall --headless
+      shell:
+        cmd: nvim +PlugInstall +qall --headless
 
