@@ -1,4 +1,8 @@
 # vim: ft=yaml.ansible
+# @TODO
+# [ ] user agnostic
+# [ ] OS agnostic
+# [ ] import playbooks conditionally
 ---
 - hosts: localhost
   connection: local
