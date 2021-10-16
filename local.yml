@@ -6,6 +6,8 @@
 ---
 - hosts: localhost
   connection: local
+  vars:
+    user_name: undg
 
   tasks:
     - name: Full system upgrade `pacman -Suy`
@@ -14,13 +16,18 @@
         update_cache: yes
         upgrade: yes
 
-    - name: Install packages from oficial repository
+    - name: Install packages from official repository
       become: true
+          # should be pre installed
       pacman:
         name: 
+          # should be pre installed
           - base-devel
-          - exa
+          - zsh
+          - sudo
           - git
+          # can be post install
+          - exa
           - htop
           - man-db
           - neovim
@@ -28,14 +35,12 @@
           - reflector
           - rsync
           - stow
-          - sudo
           - the_silver_searcher
           - tig
           - tmux
           - vim
           - xclip
           - yarn
-          - zsh
 
     - name: Clone YAY
       when: ansible_facts['distribution'] == 'Archlinux'
@@ -64,16 +69,15 @@
     - name: Clone git repo with dot files
       git:
         repo: https://github.com/undg/.dot
-        dest: /home/undg/.dot
+        dest: ~/.dot
         version: master
         clone: yes
         update: yes
         force: yes
 
     - name: Install dot files with stow
-      # chdir: /home/undg/.dot/
       shell:
-        chdir: /home/undg/.dot/
+        chdir: ~/.dot/
         cmd: ./install
 
     - name: Post install Plug and CoC
