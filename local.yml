@@ -43,9 +43,10 @@
         update: yes
 
     - name: Install YAY
-      script: 
+      command: 
         chdir: /tmp/yay-bin/
         cmd: makepkg -si 
+      # become: true
     
     # @TODO
     # - name: install AUR's packages
