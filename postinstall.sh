@@ -1,6 +1,6 @@
 #!/bin/sh
 
-pacman -Sy git sudo ansible zsh base-devel
+pacman --noconfirm -Sy git sudo ansible zsh base-devel
 
 groupadd sudo
 useradd -m -G wheel sudo -s /bin/zsh undg
