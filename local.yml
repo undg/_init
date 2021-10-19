@@ -18,7 +18,7 @@
       become: true
           # should be pre installed
       pacman:
-        name: 
+        name:
           # should be pre installed
           - base-devel
           - zsh
@@ -26,6 +26,8 @@
           - git
           # can be post install
           - exa
+          - ripgrep
+          - fd
           - htop
           - man-db
           - neovim
@@ -52,7 +54,7 @@
 
     - name: Install YAY
       when: ansible_facts['distribution'] == 'Archlinux'
-      shell: 
+      shell:
         chdir: /tmp/yay-bin/
         cmd: |
           makepkg -si --noconfirm
@@ -60,10 +62,10 @@
           yay -Syu --devel --noconfirm
           yay -Y --devel --save --noconfirm
 
-    
+
     # @TODO
     # - name: install AUR's packages
-    
+
     - name: Clone git repo with dot files
       git:
         repo: https://github.com/undg/.dot
@@ -74,11 +76,17 @@
         force: yes
 
     - name: Install dot files with stow
-      shell:
+      command:
         chdir: ~/.dot/
         cmd: ./install
+      register: myoutput
+      changed_when: myoutput.rc != 0
 
-    - name: Post install Plug and CoC
-      shell:
+    - name: 'Nvim: Post install Plug and CoC'
+      command:
         cmd: nvim +PlugInstall +qall --headless
+      register: myoutput
+      changed_when: myoutput.rc != 0
+
+    # @TODO install nvim dependencies from :checkhealt
 
