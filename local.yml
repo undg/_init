@@ -19,28 +19,33 @@
           # should be pre installed
       pacman:
         name:
+
           # should be pre installed
           - base-devel
-          - zsh
-          - sudo
           - git
+          - sudo
+          - zsh
+
           # can be post install
-          - exa
-          - ripgrep
-          - fd
-          - htop
+          - exa # ls alternative
+          - fd # find alternative
+          - htop # top alternative
+          - polkit # privilage escalation
+          - lxsession # GUI for polkit privilage escalation
           - man-db
           - neovim
           - openssh
-          - reflector
+          - reflector # pacman source list generator
+          - ripgrep # grep alternative
           - rsync
-          - stow
-          - the_silver_searcher
-          - tig
+          - stow # dot files symlink helper
+          - the_silver_searcher # grep alternative
+          - tig # git tree viewer
           - tmux
           - vim
           - xclip
           - yarn
+          - npm
 
     - name: Clone YAY
       when: ansible_facts['distribution'] == 'Archlinux'
