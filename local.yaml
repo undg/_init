@@ -16,25 +16,17 @@
 
     - name: Install packages from official repository
       become: true
-          # should be pre installed
       pacman:
         name:
-
-          # should be pre installed
-          - base-devel
-          - git
-          - sudo
-          - zsh
-
-          # can be post install
           - exa # ls alternative
           - fd # find alternative
           - htop # top alternative
-          - polkit # privilage escalation
           - lxsession # GUI for polkit privilage escalation
           - man-db
           - neovim
+          - npm
           - openssh
+          - polkit # privilage escalation
           - reflector # pacman source list generator
           - ripgrep # grep alternative
           - rsync
@@ -45,7 +37,7 @@
           - vim
           - xclip
           - yarn
-          - npm
+          - zsh
 
     - name: Clone YAY
       when: ansible_facts['distribution'] == 'Archlinux'
@@ -61,11 +53,12 @@
       when: ansible_facts['distribution'] == 'Archlinux'
       shell:
         chdir: /tmp/yay-bin/
-        cmd: |
-          makepkg -si --noconfirm
-          yay -Y --gendb --noconfirm
-          yay -Syu --devel --noconfirm
-          yay -Y --devel --save --noconfirm
+        cmd: {{item}}
+      loop:
+        - makepkg -si --noconfirm
+        - yay -Y --gendb --noconfirm
+        - yay -Syu --devel --noconfirm
+        - yay -Y --devel --save --noconfirm
 
 
     # @TODO
