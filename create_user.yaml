@@ -9,9 +9,7 @@
 
   tasks:
     - name: "Full system upgrade"
-      pacman:
-        update_cache: yes
-        upgrade: yes
+      pacman: update_cache=yes upgrade=yes
 
     - name: "Install basic apps"
       pacman:
@@ -19,27 +17,24 @@
           - base-devel
           - git
           - sudo
-        update_cache: yes
 
     - name: "Edit sudoers to activate sudo group"
       lineinfile:
         path: /etc/sudoers
         state: present
         regexp: '^%sudo\s+ALL=(ALL)\s+ALL'
-        line: '%sudo ALL=(ALL) ALL'
-        validate: '/usr/sbin/visudo -cf %s'
+        line: "%sudo ALL=(ALL) ALL"
+        validate: "/usr/sbin/visudo -cf %s"
 
-    - name: "Create groups" 
-      group: 
-        name: "{{ item }}"
-        state: present
+    - name: "Create groups"
+      group: name="{{ item }}" state=present
       loop:
         - "{{ user_name }}"
         - wheel
         - sudo
 
     - name: "Create user {{ user_name }}"
-      user: 
+      user:
         name: "{{ user_name }}"
         password: "{{ user_pwd }}"
         group: "{{ user_name }}"
@@ -47,4 +42,3 @@
           - "{{ user_name }}"
           - wheel
           - sudo
-

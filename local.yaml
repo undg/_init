@@ -1,20 +1,18 @@
 # vim: ft=yaml.ansible
-# @TODO
-# [ ] user agnostic
-# [ ] OS agnostic
-# [ ] import playbooks conditionally
+# @TODO 
+# [ ] install nvim dependencies from :checkhealt
 ---
 - hosts: localhost
   connection: local
 
   tasks:
-    - name: Full system upgrade `pacman -Suy`
+    - name: "Full system upgrade `pacman -Suy`"
       become: true
       pacman:
         update_cache: yes
         upgrade: yes
 
-    - name: Install packages from official repository
+    - name: "Install packages from official repository"
       become: true
       pacman:
         name:
@@ -39,7 +37,7 @@
           - yarn
           - zsh
 
-    - name: Clone YAY
+    - name: "Clone YAY"
       when: ansible_facts['distribution'] == 'Archlinux'
       git:
         repo:  https://aur.archlinux.org/yay-bin.git
@@ -49,22 +47,18 @@
         force: yes
         update: yes
 
-    - name: Install YAY
+    - name: "Install YAY"
       when: ansible_facts['distribution'] == 'Archlinux'
-      shell:
-        chdir: /tmp/yay-bin/
-        cmd: {{item}}
       loop:
         - makepkg -si --noconfirm
         - yay -Y --gendb --noconfirm
         - yay -Syu --devel --noconfirm
         - yay -Y --devel --save --noconfirm
+      command:
+        chdir: /tmp/yay-bin/
+        cmd: "{{ item }}"
 
-
-    # @TODO
-    # - name: install AUR's packages
-
-    - name: Clone git repo with dot files
+    - name: "Clone git repo with dot files"
       git:
         repo: https://github.com/undg/.dot
         dest: ~/.dot
@@ -73,18 +67,16 @@
         update: yes
         force: yes
 
-    - name: Install dot files with stow
+    - name: "Install dot files with stow"
       command:
         chdir: ~/.dot/
         cmd: ./install
       register: myoutput
       changed_when: myoutput.rc != 0
 
-    - name: 'Nvim: Post install Plug and CoC'
+    - name: "Nvim: Post install Plug and CoC"
       command:
         cmd: nvim +PlugInstall +qall --headless
       register: myoutput
       changed_when: myoutput.rc != 0
-
-    # @TODO install nvim dependencies from :checkhealt
 
