@@ -16,14 +16,17 @@
       become: true
       pacman:
         name:
+          - base-devel # arch stuff
+          - git
+          - sudo
           - exa # ls alternative
           - fd # find alternative
           - htop # top alternative
           - lxsession # GUI for polkit privilage escalation
-          - man-db
-          - neovim
-          - npm
-          - openssh
+          - man-db # utility for man pages
+          - neovim # vim alternative
+          - npm # yarn alternative
+          - openssh # sshd server/deamon
           - polkit # privilage escalation
           - reflector # pacman source list generator
           - ripgrep # grep alternative
@@ -33,8 +36,8 @@
           - tig # git tree viewer
           - tmux
           - vim
-          - xclip
-          - yarn
+          - xclip # system clipboard
+          - yarn # npm alternative
           - zsh
 
     - name: "Clone YAY"
@@ -47,8 +50,16 @@
         force: yes
         update: yes
 
+    # To check if any package is installed use when in another task.
+    # when: "'yay' in ansible_facts.packages"
+    - name: "Gather the packager facts"
+      package_facts:
+        manager: auto
+
     - name: "Install YAY"
-      when: ansible_facts['distribution'] == 'Archlinux'
+      when: 
+        - ansible_facts['distribution'] == 'Archlinux'
+        - "'yay' in ansible_facts.packages"
       loop:
         - makepkg -si --noconfirm
         - yay -Y --gendb --noconfirm
@@ -58,7 +69,7 @@
         chdir: /tmp/yay-bin/
         cmd: "{{ item }}"
 
-    - name: "Clone git repo with dot files"
+    - name: "Clone or update git repo with dot files"
       git:
         repo: https://github.com/undg/.dot
         dest: ~/.dot
