@@ -42,3 +42,14 @@
           - "{{ user_name }}"
           - wheel
           - sudo
+
+    - name: "Clone or update git repo with dot files"
+      become: true
+      become_user: "{{ user_name }}"
+      git:
+        repo: https://github.com/undg/.dot
+        dest: ~/.dot
+        version: master
+        clone: yes
+        update: yes
+        force: yes
