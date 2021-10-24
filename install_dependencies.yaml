@@ -1,6 +1,9 @@
 # vim: ft=yaml.ansible
 # @TODO 
+# [ ] os agnostic
 # [ ] install nvim dependencies from :checkhealt
+# [ ] install translate-shell https://git.io/trans
+# [ ] setup sshd
 ---
 - hosts: localhost
   connection: local
@@ -38,10 +41,19 @@
           - vim
           - xclip # system clipboard
           - yarn # npm alternative
+          - translate-shell # command-line translator (trans)
           - zsh
 
+    # To check if any package is installed use when in another task.
+    # when: "'yay' in ansible_facts.packages"
+    - name: "Gather the packager facts"
+      package_facts:
+        manager: auto
+
     - name: "Clone YAY"
-      when: ansible_facts['distribution'] == 'Archlinux'
+      when: 
+        - ansible_facts['distribution'] == 'Archlinux'
+        - "'yay' in ansible_facts.packages"
       git:
         repo:  https://aur.archlinux.org/yay-bin.git
         dest: /tmp/yay-bin/
@@ -49,12 +61,6 @@
         clone: yes
         force: yes
         update: yes
-
-    # To check if any package is installed use when in another task.
-    # when: "'yay' in ansible_facts.packages"
-    - name: "Gather the packager facts"
-      package_facts:
-        manager: auto
 
     - name: "Install YAY"
       when: 

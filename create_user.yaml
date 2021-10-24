@@ -42,6 +42,8 @@
           - "{{ user_name }}"
           - wheel
           - sudo
+        create_home: true
+        shell: /usr/bin/zsh
 
     - name: "Clone or update git repo with dot files"
       become: true
