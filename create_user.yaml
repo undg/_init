@@ -3,7 +3,7 @@
 - hosts: localhost
   connection: local
   vars:
-    user_name: test1
+    user_name: "{{ user | default('test1') }}"
     # u
     user_pwd: $6$5EgjF/SnIsEHlUJP$Rib8QMASRU/yaXj15DtfQXP9s0htgy4BmB/MaqUGvArFNHgv6sHquGpfVapZZxnAMmVXCKrY571fbLhEHfe2W.
 
