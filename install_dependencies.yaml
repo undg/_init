@@ -43,6 +43,7 @@
           - yarn # npm alternative
           - translate-shell # command-line translator (trans)
           - zsh
+          - starship # zsh prompt
 
     # To check if any package is installed use when in another task.
     # when: "'yay' in ansible_facts.packages"
@@ -74,6 +75,12 @@
       command:
         chdir: /tmp/yay-bin/
         cmd: "{{ item }}"
+
+    - name: Install package from AUR using a Pacman compatible AUR helper
+      community.general.pacman:
+        name: nerd-fonts-complete-starship
+        state: present
+        executable: yay
 
     - name: "Clone or update git repo with dot files"
       git:
