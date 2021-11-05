@@ -24,6 +24,7 @@
           - sudo
           - exa # ls alternative
           - fd # find alternative
+          - git-delta # diff syntax-highlighting
           - htop # top alternative
           - lxsession # GUI for polkit privilage escalation
           - man-db # utility for man pages
