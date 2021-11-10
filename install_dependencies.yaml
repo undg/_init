@@ -102,6 +102,8 @@
     - name: "Nvim: Post install Plug and CoC"
       command:
         cmd: nvim +PlugInstall +qall --headless
+        # You can also use the following command (with packer bootstrapped) to have packer setup your configuration (or simply run updates) and close once all operations are completed:
+        # cmd: nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
       register: myoutput
       changed_when: myoutput.rc != 0
 
