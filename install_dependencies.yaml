@@ -55,6 +55,7 @@
     - name: "Clone YAY"
       when: 
         - ansible_facts['distribution'] == 'Archlinux'
+        # when it is not in packages @TODO fix it 🐛
         - "'yay' in ansible_facts.packages"
       git:
         repo:  https://aur.archlinux.org/yay-bin.git
@@ -67,6 +68,7 @@
     - name: "Install YAY"
       when: 
         - ansible_facts['distribution'] == 'Archlinux'
+        # when it is not in packages @TODO fix it 🐛
         - "'yay' in ansible_facts.packages"
       loop:
         - makepkg -si --noconfirm
