@@ -81,7 +81,9 @@
 
     - name: Install package from AUR using a Pacman compatible AUR helper
       community.general.pacman:
-        name: nerd-fonts-complete-starship
+        name: 
+          - nerd-fonts-complete-starship
+          - stylua-bin
         state: present
         executable: yay
 
@@ -101,11 +103,11 @@
       register: myoutput
       changed_when: myoutput.rc != 0
 
-    - name: "Nvim: Post install Plug and CoC"
-      command:
-        cmd: nvim +PlugInstall +qall --headless
-        # You can also use the following command (with packer bootstrapped) to have packer setup your configuration (or simply run updates) and close once all operations are completed:
-        # cmd: nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-      register: myoutput
-      changed_when: myoutput.rc != 0
+    # - name: "Nvim: Post install Plug and CoC"
+    #   command:
+    #     cmd: nvim +PlugInstall +qall --headless
+    #     # You can also use the following command (with packer bootstrapped) to have packer setup your configuration (or simply run updates) and close once all operations are completed:
+    #     # cmd: nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+    #   register: myoutput
+    #   changed_when: myoutput.rc != 0
 
