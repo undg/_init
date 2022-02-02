@@ -28,23 +28,25 @@
           - htop # top alternative
           - lxsession # GUI for polkit privilage escalation
           - man-db # utility for man pages
-          - neovim # vim alternative
           - npm # yarn alternative
           - openssh # sshd server/deamon
           - polkit # privilage escalation
           - reflector # pacman source list generator
           - ripgrep # grep alternative
-          - rsync
+          - rsync # copy, archive, sync, backup files over file system, ssh, ftp...
           - stow # dot files symlink helper
           - the_silver_searcher # grep alternative
           - tig # git tree viewer
           - tmux
-          - vim
+          - vim # VI improved
+          - neovim # VIM improved
           - xclip # system clipboard
           - yarn # npm alternative
           - translate-shell # command-line translator (trans)
-          - zsh
+          - zsh # best shell ever, ZSH FTW!!!
           - starship # zsh prompt
+          - python-black # code formatter for python
+          - shftm # code formatter for shell scripts
 
     # To check if any package is installed use when in another task.
     # when: "'yay' in ansible_facts.packages"
@@ -82,8 +84,8 @@
     - name: Install package from AUR using a Pacman compatible AUR helper
       community.general.pacman:
         name: 
-          - nerd-fonts-complete-starship
-          - stylua-bin
+          - nerd-fonts-complete-starship # starship is prompt for zsh
+          - stylua-bin # code formatter for lua
         state: present
         executable: yay
 
