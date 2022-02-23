@@ -86,6 +86,7 @@
         name: 
           - nerd-fonts-complete-starship # starship is prompt for zsh
           - stylua-bin # code formatter for lua
+          - nvim-packer-git
         state: present
         executable: yay
 
