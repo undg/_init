@@ -32,7 +32,7 @@
           - openssh # sshd server/deamon
           - polkit # privilage escalation
           - reflector # pacman source list generator
-          - ripgrep # grep alternative
+          - ripgrep-all # grep alternative with ag speed
           - rsync # copy, archive, sync, backup files over file system, ssh, ftp...
           - stow # dot files symlink helper
           - the_silver_searcher # grep alternative
