@@ -87,6 +87,7 @@
           - nerd-fonts-complete-starship # starship is prompt for zsh
           - stylua-bin # code formatter for lua
           - nvim-packer-git
+          - pa-notify # notification for pulse audio
         state: present
         executable: yay
 
