@@ -47,6 +47,8 @@
           - starship # zsh prompt
           - python-black # code formatter for python
           - shftm # code formatter for shell scripts
+          - jq # code formatter for JSON
+          - hq # code formatter for HTML
 
     # To check if any package is installed use when in another task.
     # when: "'yay' in ansible_facts.packages"
